@@ -1,0 +1,22 @@
+version: '2'
+services:
+  db:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: getmeup_dev
+
+  web:
+    build: .
+    volumes:
+      - ./../:/app
+    ports:
+      - "4000:4000"
+    depends_on:
+      - db
+    command: ./docker/run.sh
+    links:
+      - "db:database"
