@@ -6,6 +6,10 @@ defmodule Getmeup.Schema do
     field :users, list_of(:user) do
       resolve &Getmeup.UserResolver.all/2
     end
+
+    field :current_user, :user do
+      resolve &Getmeup.UserResolver.get_current_user/2
+    end
   end
 
   mutation do

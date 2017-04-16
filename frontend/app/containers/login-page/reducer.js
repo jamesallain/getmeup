@@ -6,7 +6,7 @@ import { fromJS } from 'immutable';
 
 import {
   CHANGE_FIELD_VALUE,
-  SUBMIT_LOGIN_FORM,
+  LOGIN_SUCCESS,
 } from './constants';
 
 // The initial state of event detail page
@@ -34,7 +34,7 @@ function loginReducer(state = initialState, action) {
       return state
         .setIn(['loginInfo', action.fieldName], action.fieldValue);
 
-    case SUBMIT_LOGIN_FORM:
+    case LOGIN_SUCCESS:
       return state
         .set('loading', true);
 

@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import {
   changeFieldValue,
-  submitLoginForm,
+  loginSuccess,
 } from './actions';
 
 import {
@@ -18,22 +18,22 @@ import LoginMutation from './graphql/mutations';
 
 export class LoginPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {
-    onChangeFieldValue: React.PropTypes.func,
-    onSubmitLoginForm: React.PropTypes.func,
     loginInfo: React.PropTypes.object,
+    onChangeFieldValue: React.PropTypes.func,
+    onLoginSuccess: React.PropTypes.func,
   }
 
   render() {
     const {
-      onChangeFieldValue,
-      onSubmitLoginForm,
       loginInfo,
+      onChangeFieldValue,
+      onLoginSuccess,
     } = this.props;
     return (
       <LoginMutation
-        onChangeFieldValue={onChangeFieldValue}
-        onSubmitLoginForm={onSubmitLoginForm}
         loginInfo={loginInfo}
+        onChangeFieldValue={onChangeFieldValue}
+        onLoginSuccess={onLoginSuccess}
       />
     );
   }
@@ -42,7 +42,7 @@ export class LoginPage extends React.Component { // eslint-disable-line react/pr
 export function mapDispatchToProps(dispatch) {
   return {
     onChangeFieldValue: (e) => dispatch(changeFieldValue(e)),
-    onSubmitLoginForm: (loginInfo) => dispatch(submitLoginForm(loginInfo)),
+    onLoginSuccess: () => dispatch(loginSuccess()),
   };
 }
 

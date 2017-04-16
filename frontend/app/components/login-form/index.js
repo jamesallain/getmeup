@@ -33,6 +33,8 @@ export default class LoginForm extends React.Component { // eslint-disable-line 
     e.preventDefault();
     const { loginInfo, login } = this.props;
     login(loginInfo.get('email'), loginInfo.get('password'));
+
+    // this.props.onLoginSuccess();
   }
 
   render() {

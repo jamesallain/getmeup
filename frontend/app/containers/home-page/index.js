@@ -5,7 +5,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import ContactsDrawerRight from '../../components/contacts-drawer-right';
 
 export class HomePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {
@@ -13,7 +12,7 @@ export class HomePage extends React.Component { // eslint-disable-line react/pre
 
   render() {
     return (
-      <ContactsDrawerRight />
+      <div />
     );
   }
 }

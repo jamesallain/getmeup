@@ -224,6 +224,8 @@
     "lodash": "4.17.2",
     "material-ui": "0.17.1",
     "minimist": "1.2.0",
+    "phoenix": "1.2.1",
+    "radium": "0.18.2",
     "react": "15.4.1",
     "react-apollo": "1.0.0",
     "react-dom": "15.4.1",

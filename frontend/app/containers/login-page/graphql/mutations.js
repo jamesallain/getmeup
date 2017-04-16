@@ -3,10 +3,7 @@
  */
 
 import { gql, graphql } from 'react-apollo';
-import { browserHistory } from 'react-router';
 import LoginForm from '../../../components/login-form';
-import { authenticateUser } from '../../../utils/auth';
-import routePaths from '../../../route-paths';
 
 const loginMutation = gql`
   mutation signIn($email: String!, $password: String!) {
@@ -19,16 +16,17 @@ const loginMutation = gql`
 `;
 
 export default graphql(loginMutation, {
-  props: ({ mutate }) => ({
+  props: ({ ownProps, mutate }) => ({
     login: (email, password) => mutate({
       variables: { email, password },
     })
     .then(({ data }) => {
-      authenticateUser(data.sign_in.token);
-      browserHistory.push(routePaths.getHomePath());
+      const user = data.sign_in;
+      ownProps.onLoginSuccess(user);
     })
     .catch((error) => {
       // TODO: error handling here
+      console.log({error});
     }),
   }),
 })(LoginForm);

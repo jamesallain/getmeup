@@ -49,10 +49,22 @@ defmodule Getmeup.User do
     |> Joken.get_compact
   end
 
-  def verify_token(token) do
+  defp parse_token(token) do
     token
     |> Joken.token
     |> Joken.with_signer(Joken.hs256("my_secret"))
     |> Joken.verify
+  end
+
+  defp is_expired(claims) do
+    case claims["expired_at"] < DateTime.to_unix(DateTime.utc_now, :milliseconds) do
+      true -> {:error, "Token is expired."}
+      false -> {:ok, %{user_id: claims["user_id"]}}
+    end
+  end
+
+  def verify_token(token) do
+    with %{error: nil, claims: claims} <- parse_token(token),
+      do: is_expired(claims)
   end
 end

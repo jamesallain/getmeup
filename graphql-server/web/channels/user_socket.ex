@@ -1,8 +1,10 @@
 defmodule Getmeup.UserSocket do
   use Phoenix.Socket
 
+  alias Getmeup.{User, Repo}
+
   ## Channels
-  # channel "room:*", Getmeup.RoomChannel
+  channel "users:*", Getmeup.UserChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket
@@ -19,9 +21,15 @@ defmodule Getmeup.UserSocket do
   #
   # See `Phoenix.Token` documentation for examples in
   # performing token verification on connect.
-  def connect(_params, socket) do
-    {:ok, socket}
+  def connect(%{"token" => token}, socket) do
+    case User.verify_token(token) do
+      {:ok, %{user_id: user_id}} ->
+        {:ok, assign(socket, :current_user, Repo.get(User, user_id))}
+      {:error, _error} -> :error
+    end
   end
+
+  def connect(_params, _socket), do: :error
 
   # Socket id's are topics that allow you to identify all sockets for a given user:
   #
@@ -33,5 +41,6 @@ defmodule Getmeup.UserSocket do
   #     Getmeup.Endpoint.broadcast("users_socket:#{user.id}", "disconnect", %{})
   #
   # Returning `nil` makes this socket anonymous.
-  def id(_socket), do: nil
+  # def id(socket), do: "users_socket:#{socket.assigns.fuck}"
+  def id(socket), do: nil
 end

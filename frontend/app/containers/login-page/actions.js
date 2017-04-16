@@ -2,9 +2,12 @@
  * Login page actions
  */
 
+import { browserHistory } from 'react-router';
+import { authenticateUser } from '../../utils/auth';
+import routePaths from '../../route-paths';
 import {
   CHANGE_FIELD_VALUE,
-  SUBMIT_LOGIN_FORM,
+  LOGIN_SUCCESS,
 } from './constants';
 
 /**
@@ -19,11 +22,12 @@ export function changeFieldValue(event) {
 }
 
 /**
- * Submit login form
+ * Login success
  */
-export function submitLoginForm(loginInfo) {
+export function loginSuccess(user) {
+  authenticateUser(user.token);
+  browserHistory.push(routePaths.getHomePath());
   return {
-    type: SUBMIT_LOGIN_FORM,
-    loginInfo,
+    type: LOGIN_SUCCESS,
   };
 }

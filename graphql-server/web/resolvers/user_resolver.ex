@@ -7,11 +7,16 @@ defmodule Getmeup.UserResolver do
   @seven_days_in_ms 7*24*3600*1000
 
   def all(_args, %{context: %{current_user: current_user}}) do
-    IO.inspect current_user
     {:ok, Repo.all(User)}
   end
-
   def all(_args, _info) do
+    {:error, "Not authorized."}
+  end
+
+  def get_current_user(_args, %{context: %{current_user: current_user}}) do
+    {:ok, current_user}
+  end
+  def get_current_user(_args, _info) do
     {:error, "Not authorized."}
   end
 
