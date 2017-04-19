@@ -17,10 +17,10 @@ defmodule Getmeup.Context do
   Return the current user context based on the authorization header
   """
   def build_context(conn) do
-    IO.inspect "Authorization: "
-    ["Bearer " <> token] = get_req_header(conn, "authorization")
-    IO.inspect token
-    with {:ok, %{user_id: user_id}} <- User.verify_token(token),
+    # sign_up, sign_in have no authorization header so those will fail & stop at first step
+    # and go directly to sign_up, sign_in handler without verify_token
+    with ["Bearer " <> token] <- get_req_header(conn, "authorization"),
+      {:ok, %{user_id: user_id}} <- User.verify_token(token),
       user <- Repo.get(User, user_id),
       do: {:ok, %{current_user: user}}
   end

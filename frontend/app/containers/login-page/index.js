@@ -42,7 +42,7 @@ export class LoginPage extends React.Component { // eslint-disable-line react/pr
 export function mapDispatchToProps(dispatch) {
   return {
     onChangeFieldValue: (e) => dispatch(changeFieldValue(e)),
-    onLoginSuccess: () => dispatch(loginSuccess()),
+    onLoginSuccess: (user) => dispatch(loginSuccess(user)),
   };
 }
 

@@ -12,6 +12,8 @@ defmodule Getmeup do
       supervisor(Getmeup.Repo, []),
       # Start the endpoint when the application starts
       supervisor(Getmeup.Endpoint, []),
+      # Start Presence
+      supervisor(Getmeup.Presence, []),
       # Start your own worker by calling: Getmeup.Worker.start_link(arg1, arg2, arg3)
       # worker(Getmeup.Worker, [arg1, arg2, arg3]),
     ]

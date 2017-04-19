@@ -10,3 +10,5 @@
  */
 
 export const DEFAULT_LOCALE = 'en';
+export const SYNC_PRESENCE_STATE = 'getmeup/main/SYNC_PRESENCE_STATE';
+export const UPDATE_PRESENCE_DIFF = 'getmeup/main/UPDATE_PRESENCE_DIFF';

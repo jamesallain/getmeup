@@ -1,3 +1,9 @@
+/**
+ * The main state selectors
+ */
+
+import { createSelector } from 'reselect';
+
 // makeSelectLocationState expects a plain JS object for the routing state
 const makeSelectLocationState = () => {
   let prevRoutingState;
@@ -15,6 +21,21 @@ const makeSelectLocationState = () => {
   };
 };
 
+const selectMain = (state) => state.get('global');
+
+const makeSelectPresence = () => createSelector(
+  selectMain,
+  (mainState) => mainState.get('presence')
+);
+
+const makeSelectConnected = () => createSelector(
+  selectMain,
+  (mainState) => mainState.get('connected')
+);
+
 export {
   makeSelectLocationState,
+  selectMain,
+  makeSelectPresence,
+  makeSelectConnected,
 };

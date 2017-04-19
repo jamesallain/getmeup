@@ -11,10 +11,11 @@
  */
 
 import { fromJS } from 'immutable';
+import { Presence } from 'phoenix';
 
 import {
-  // FETCHING_REQUEST,
-  // HANDLE_ERRORS,
+  SYNC_PRESENCE_STATE,
+  UPDATE_PRESENCE_DIFF,
 } from './constants';
 
 // The initial state of the App
@@ -22,16 +23,20 @@ const initialState = fromJS({
   fetching: false,
   error: null,
   user: false,
+  presence: {},
+  connected: false,
 });
 
 function appReducer(state = initialState, action) {
   switch (action.type) {
-    // case FETCHING_REQUEST:
-    //   return state
-    //     .set('fetching', action.fetching);
-    // case HANDLE_ERRORS:
-    //   return state
-    //     .set('error', action.error);
+    case SYNC_PRESENCE_STATE:
+      return state
+        .set('connected', true)
+        .set('presence', fromJS(Presence.syncState(state.get('presence'), action.initialPresence)));
+
+    case UPDATE_PRESENCE_DIFF:
+      return state
+        .set('presence', fromJS(Presence.syncDiff(state.get('presence'), action.diff)));
 
     default:
       return state;
