@@ -4,6 +4,7 @@
 
 import { gql, graphql } from 'react-apollo';
 import LoginForm from '../../../components/login-form';
+// import { connectSocket } from '../../../utils/socket';
 
 const loginMutation = gql`
   mutation signIn($email: String!, $password: String!) {
@@ -23,10 +24,11 @@ export default graphql(loginMutation, {
     .then(({ data }) => {
       const user = data.sign_in;
       ownProps.onLoginSuccess(user);
+      // connectSocket(ownProps);
     })
     .catch((error) => {
       // TODO: error handling here
-      console.log({error});
+      // console.log({error});
     }),
   }),
 })(LoginForm);

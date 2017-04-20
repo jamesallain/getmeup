@@ -1,5 +1,5 @@
 /*
- * Login Form
+ * Contacts right drawer
  */
 
 import React from 'react';

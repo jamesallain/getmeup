@@ -28,14 +28,14 @@ const makeSelectPresence = () => createSelector(
   (mainState) => mainState.get('presence')
 );
 
-const makeSelectConnected = () => createSelector(
+const makeSelectCurrentUser = () => createSelector(
   selectMain,
-  (mainState) => mainState.get('connected')
+  (mainState) => mainState.get('currentUser')
 );
 
 export {
   makeSelectLocationState,
   selectMain,
   makeSelectPresence,
-  makeSelectConnected,
+  makeSelectCurrentUser,
 };

@@ -16,15 +16,15 @@ import { Presence } from 'phoenix';
 import {
   SYNC_PRESENCE_STATE,
   UPDATE_PRESENCE_DIFF,
+  UPDATE_CURRENT_USER,
 } from './constants';
 
 // The initial state of the App
 const initialState = fromJS({
   fetching: false,
   error: null,
-  user: false,
   presence: {},
-  connected: false,
+  currentUser: null,
 });
 
 function appReducer(state = initialState, action) {
@@ -37,6 +37,10 @@ function appReducer(state = initialState, action) {
     case UPDATE_PRESENCE_DIFF:
       return state
         .set('presence', fromJS(Presence.syncDiff(state.get('presence'), action.diff)));
+
+    case UPDATE_CURRENT_USER:
+      return state
+        .set('currentUser', fromJS(action.user));
 
     default:
       return state;

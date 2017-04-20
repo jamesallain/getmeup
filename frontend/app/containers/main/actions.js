@@ -4,6 +4,7 @@
 import {
   SYNC_PRESENCE_STATE,
   UPDATE_PRESENCE_DIFF,
+  UPDATE_CURRENT_USER,
 } from './constants';
 
 /**
@@ -17,11 +18,21 @@ export function syncPresenceState(initialPresence) {
 }
 
 /**
- * Login success
+ * Update presence diff
  */
 export function updatePresenceDiff(diff) {
   return {
     type: UPDATE_PRESENCE_DIFF,
     diff,
+  };
+}
+
+/**
+ * Update current user
+ */
+export function updateCurrentUser(user) {
+  return {
+    type: UPDATE_CURRENT_USER,
+    user,
   };
 }
