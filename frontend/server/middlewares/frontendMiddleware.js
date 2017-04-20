@@ -31,6 +31,8 @@ const addDevMiddlewares = (app, webpackConfig) => {
     });
   }
 
+  app.use('/', express.static('public'));
+
   app.get('*', (req, res) => {
     fs.readFile(path.join(compiler.outputPath, 'index.html'), (err, file) => {
       if (err) {
@@ -52,6 +54,7 @@ const addProdMiddlewares = (app, options) => {
   // and other good practices on official Express.js docs http://mxs.is/googmy
   app.use(compression());
   app.use(publicPath, express.static(outputPath));
+  // app.use(publicPath, express.static('build'));
 
   app.get('*', (req, res) => res.sendFile(path.resolve(outputPath, 'index.html')));
 };

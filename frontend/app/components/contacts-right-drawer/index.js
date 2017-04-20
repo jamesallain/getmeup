@@ -20,9 +20,9 @@ export default class ContactsRightDrawer extends React.Component { // eslint-dis
     return (
       <div>
         <Drawer
-          width={styles.drawer.width}
           openSecondary
           open
+          containerStyle={styles.drawerContainer}
         >
           <List>
             <Subheader>
@@ -43,7 +43,8 @@ export default class ContactsRightDrawer extends React.Component { // eslint-dis
 }
 
 const styles = {
-  drawer: {
+  drawerContainer: {
     width: 200,
+    top: 56,
   },
 };

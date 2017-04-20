@@ -16,10 +16,6 @@ const initialState = fromJS({
     email: false,
     password: false,
   },
-  currentUser: {
-    email: false,
-    token: false,
-  },
   errors: {
     email: false,
     password: false,
