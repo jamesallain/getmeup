@@ -9,6 +9,7 @@ defmodule Getmeup.Schema.Types.User do
     field :password_hash, :string
     field :roles, list_of(:string)
     field :bio, :string
+    field :avatar, :string
     field :token, :string
   end
 end

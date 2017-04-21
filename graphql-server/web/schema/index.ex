@@ -19,6 +19,7 @@ defmodule Getmeup.Schema do
       arg :password, non_null(:string)
       arg :roles, list_of(:string)
       arg :bio, :string
+      arg :avatar, :string
 
       resolve &Getmeup.UserResolver.sign_up/2
   	end

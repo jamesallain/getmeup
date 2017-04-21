@@ -13,7 +13,8 @@ defmodule Getmeup.UserChannel do
     push socket, "presence_state", Presence.list(socket)
     {:ok, _} = Presence.track(socket, current_user.id, %{
       status: "online",
-      name: current_user.name
+      name: current_user.name,
+      avatar: current_user.avatar
     })
     {:noreply, socket}
   end

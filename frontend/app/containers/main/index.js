@@ -66,6 +66,7 @@ export class App extends React.Component { // eslint-disable-line react/prefer-s
     return userIds.map((userId) => ({
       id: userId,
       name: presenceObj[userId].metas[0].name,
+      avatar: presenceObj[userId].metas[0].avatar,
     }));
   }
 

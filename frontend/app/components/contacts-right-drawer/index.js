@@ -9,6 +9,7 @@ import { List, ListItem } from 'material-ui/List';
 import Subheader from 'material-ui/Subheader';
 import Avatar from 'material-ui/Avatar';
 import messages from './messages';
+import folders from '../../constants/folders';
 
 export default class ContactsRightDrawer extends React.Component { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {
@@ -32,7 +33,7 @@ export default class ContactsRightDrawer extends React.Component { // eslint-dis
               <ListItem
                 key={user.id}
                 primaryText={user.name}
-                leftAvatar={<Avatar src="images/ok-128.jpg" />}
+                leftAvatar={<Avatar src={`${folders.assets}${user.avatar}`} />}
               />
             )}
           </List>

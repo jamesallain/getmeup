@@ -11,6 +11,7 @@ import {
 
 //import messages from './messages';
 import assets from '../../constants/assets';
+import folders from '../../constants/folders';
 
 export default class Header extends React.Component { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {
@@ -19,6 +20,8 @@ export default class Header extends React.Component { // eslint-disable-line rea
 
   render() {
     const { currentUser } = this.props;
+    const avatarUrl = currentUser ? `${folders.assets}${currentUser.get('avatar')}` : assets.defaultAvatar;
+    const username = currentUser ? currentUser.get('name') : '';
     return (
       <div>
         <Toolbar>
@@ -31,10 +34,10 @@ export default class Header extends React.Component { // eslint-disable-line rea
           </ToolbarGroup>
           <ToolbarGroup>
             <Avatar
-              src="images/uxceo-128.jpg"
+              src={avatarUrl}
               size={30}
             />
-            <span style={styles.name}>{currentUser && currentUser.get('name')}</span>
+            <span style={styles.name}>{username}</span>
           </ToolbarGroup>
         </Toolbar>
       </div>

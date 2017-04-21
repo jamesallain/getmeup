@@ -9,6 +9,7 @@ defmodule Getmeup.User do
     field :password_hash, :string
     field :roles, {:array, :string}
     field :bio, :string
+    field :avatar, :string
 
     timestamps()
   end
@@ -18,7 +19,7 @@ defmodule Getmeup.User do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:name, :email, :password, :roles, :bio])
+    |> cast(params, [:name, :email, :password, :roles, :bio, :avatar])
     |> validate_required([:name, :email, :password, :roles])
     |> unique_constraint(:email)
     |> validate_length(:password, min: 5)

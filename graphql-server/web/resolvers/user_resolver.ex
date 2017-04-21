@@ -22,8 +22,6 @@ defmodule Getmeup.UserResolver do
 
 
   def sign_up(args, _info) do
-    IO.inspect "vao sign_up"
-    IO.inspect _info
     changeset = User.changeset(%User{}, args)
     case Repo.insert(changeset) do
       {:ok, user} ->
