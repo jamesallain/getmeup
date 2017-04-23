@@ -3,5 +3,5 @@
  */
 
 export default {
-  assets: '/assets/',
+  assets: 'assets',
 };

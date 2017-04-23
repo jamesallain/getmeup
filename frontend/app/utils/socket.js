@@ -5,6 +5,14 @@
 import { Socket } from 'phoenix';
 import { getToken } from './auth';
 
+function registerUserJoinedEvent(channel) {
+  return new Promise((resolve, _reject) => {
+    channel.on('user_joined', (user) => {
+      resolve(user);
+    });
+  });
+}
+
 export function connectSocket(props) {
   const socket = new Socket('ws://localhost:9191/socket', {
     params: { token: getToken() },
@@ -26,7 +34,9 @@ export function connectSocket(props) {
       console.log('Unable to join', resp);
     });
 
-  channel.on('presence_state', (initialPresence) => props.onSyncPresenceState(initialPresence));
-  channel.on('presence_diff', (diff) => props.onUpdatePresenceDiff(diff));
-  channel.on('user_joined', (user) => props.onUpdateCurrentUser(user));
+  channel.on('user_joined', (user) => {
+    props.onUpdateCurrentUser(user);
+    channel.on('presence_state', (initialPresence) => props.onSyncPresenceState(initialPresence));
+    channel.on('presence_diff', (diff) => props.onUpdatePresenceDiff(diff));
+  });
 }

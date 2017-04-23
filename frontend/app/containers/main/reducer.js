@@ -35,6 +35,8 @@ function appReducer(state = initialState, action) {
         .set('presence', fromJS(Presence.syncState(state.get('presence'), action.initialPresence)));
 
     case UPDATE_PRESENCE_DIFF:
+      // console.log('diff ---: ', Presence.syncDiff(state.get('presence'), action.diff));
+
       return state
         .set('presence', fromJS(Presence.syncDiff(state.get('presence'), action.diff)));
 

@@ -33,7 +33,7 @@ export default class ContactsRightDrawer extends React.Component { // eslint-dis
               <ListItem
                 key={user.id}
                 primaryText={user.name}
-                leftAvatar={<Avatar src={`${folders.assets}${user.avatar}`} />}
+                leftAvatar={<Avatar src={`/${folders.assets}/${user.avatar}`} />}
               />
             )}
           </List>

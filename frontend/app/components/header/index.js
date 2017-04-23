@@ -20,7 +20,7 @@ export default class Header extends React.Component { // eslint-disable-line rea
 
   render() {
     const { currentUser } = this.props;
-    const avatarUrl = currentUser ? `${folders.assets}${currentUser.get('avatar')}` : assets.defaultAvatar;
+    const avatarUrl = currentUser ? `/${folders.assets}/${currentUser.get('avatar')}` : assets.defaultAvatar;
     const username = currentUser ? currentUser.get('name') : '';
     return (
       <div>

@@ -60,19 +60,28 @@ export class App extends React.Component { // eslint-disable-line react/prefer-s
     }
   }
 
-  extractUsersInfoFromPresence(presence) {
+  extractUsersInfoFromPresence(presence, currentUser) {
+    if (!currentUser) {
+      return [];
+    }
     const presenceObj = presence.toJS();
     const userIds = Object.keys(presenceObj);
-    return userIds.map((userId) => ({
-      id: userId,
-      name: presenceObj[userId].metas[0].name,
-      avatar: presenceObj[userId].metas[0].avatar,
-    }));
+    const result = userIds.reduce((acc, userId) => {
+      if (parseInt(currentUser.get('id'), 10) === parseInt(userId, 10)) {
+        return acc;
+      }
+      return acc.concat({
+        id: userId,
+        name: presenceObj[userId].metas[0].name,
+        avatar: presenceObj[userId].metas[0].avatar,
+      });
+    }, []);
+    return result;
   }
 
   render() {
     const { presence, currentUser } = this.props;
-    const users = this.extractUsersInfoFromPresence(presence);
+    const users = this.extractUsersInfoFromPresence(presence, currentUser);
     const showHideLoggedInComponentsStyle = isUserAuthenticated() && currentUser ? 'show' : 'hide';
     return (
       <StyleRoot>
