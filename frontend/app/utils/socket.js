@@ -5,14 +5,6 @@
 import { Socket } from 'phoenix';
 import { getToken } from './auth';
 
-function registerUserJoinedEvent(channel) {
-  return new Promise((resolve, _reject) => {
-    channel.on('user_joined', (user) => {
-      resolve(user);
-    });
-  });
-}
-
 export function connectSocket(props) {
   const socket = new Socket('ws://localhost:9191/socket', {
     params: { token: getToken() },
