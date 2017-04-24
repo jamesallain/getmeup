@@ -13,11 +13,11 @@ import folders from '../../constants/folders';
 
 export default class ContactsRightDrawer extends React.Component { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {
-    users: React.PropTypes.array,
+    mostRecentOnlineContacts: React.PropTypes.array,
   }
 
   render() {
-    const { users } = this.props;
+    const { mostRecentOnlineContacts } = this.props;
     return (
       <div>
         <Drawer
@@ -29,7 +29,7 @@ export default class ContactsRightDrawer extends React.Component { // eslint-dis
             <Subheader>
               <FormattedMessage {...messages.onlineLabel} />
             </Subheader>
-            {users.map((user) =>
+            {mostRecentOnlineContacts.map((user) =>
               <ListItem
                 key={user.id}
                 primaryText={user.name}

@@ -33,9 +33,15 @@ const makeSelectCurrentUser = () => createSelector(
   (mainState) => mainState.get('currentUser')
 );
 
+const makeSelectMostRecentOnlineContacts = () => createSelector(
+  selectMain,
+  (mainState) => mainState.get('mostRecentOnlineContacts')
+);
+
 export {
   makeSelectLocationState,
   selectMain,
   makeSelectPresence,
   makeSelectCurrentUser,
+  makeSelectMostRecentOnlineContacts,
 };

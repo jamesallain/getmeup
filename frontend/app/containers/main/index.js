@@ -1,6 +1,6 @@
 /**
  *
- * App.react.js
+ * main.react.js
  *
  * This component is the skeleton around the actual pages, and should only
  * contain code that should be seen on all pages. (e.g. navigation bar)
@@ -28,13 +28,14 @@ import {
 import {
   makeSelectPresence,
   makeSelectCurrentUser,
+  makeSelectMostRecentOnlineContacts,
 } from './selectors';
 
 export class App extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     children: React.PropTypes.node,
-    presence: React.PropTypes.object,
+    mostRecentOnlineContacts: React.PropTypes.object,
     currentUser: React.PropTypes.object,
     router: React.PropTypes.shape({
       push: React.PropTypes.func.isRequired,
@@ -60,28 +61,8 @@ export class App extends React.Component { // eslint-disable-line react/prefer-s
     }
   }
 
-  extractUsersInfoFromPresence(presence, currentUser) {
-    if (!currentUser) {
-      return [];
-    }
-    const presenceObj = presence.toJS();
-    const userIds = Object.keys(presenceObj);
-    const result = userIds.reduce((acc, userId) => {
-      if (parseInt(currentUser.get('id'), 10) === parseInt(userId, 10)) {
-        return acc;
-      }
-      return acc.concat({
-        id: userId,
-        name: presenceObj[userId].metas[0].name,
-        avatar: presenceObj[userId].metas[0].avatar,
-      });
-    }, []);
-    return result;
-  }
-
   render() {
-    const { presence, currentUser } = this.props;
-    const users = this.extractUsersInfoFromPresence(presence, currentUser);
+    const { currentUser, mostRecentOnlineContacts } = this.props;
     const showHideLoggedInComponentsStyle = isUserAuthenticated() && currentUser ? 'show' : 'hide';
     return (
       <StyleRoot>
@@ -92,7 +73,7 @@ export class App extends React.Component { // eslint-disable-line react/prefer-s
           style={styles.contactsRightDrawer[showHideLoggedInComponentsStyle]}
         >
           <ContactsRightDrawer
-            users={users}
+            mostRecentOnlineContacts={mostRecentOnlineContacts.toJS()}
           />
         </section>
         <section
@@ -118,6 +99,7 @@ export function mapDispatchToProps(dispatch) {
 const mapStateToProps = createStructuredSelector({
   presence: makeSelectPresence(),
   currentUser: makeSelectCurrentUser(),
+  mostRecentOnlineContacts: makeSelectMostRecentOnlineContacts(),
 });
 
 // Wrap the component to inject dispatch and state into it

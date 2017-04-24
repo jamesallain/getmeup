@@ -36,8 +36,9 @@ function listBy(userId, { metas }) {
   };
 }
 
-function getMostRecentOnlineContacts(presences) {
+function getMostRecentOnlineContacts(presences, currentUser) {
   return Presence.list(presences, listBy)
+    .filter((item) => parseInt(item.id, 10) !== parseInt(currentUser.get('id'), 10))
     .sort((a, b) => b - a)
     .slice(0, NUMBER_OF_ONLINE_CONTACTS_ON_RIGHT_DRAWER);
 }
@@ -48,7 +49,7 @@ function updateMostRecentOnlineContacts(presences, diff, currentUser, oldMostRec
   const leaveIds = Object.keys(diff.leaves);
   if (joinIds.length) {
     const joinUsers = joinIds.reduce((acc, userId) => {
-      if (currentUser.id === userId) {
+      if (parseInt(currentUser.get('id'), 10) === parseInt(userId, 10)) {
         return acc;
       }
       return acc.concat({
@@ -59,21 +60,22 @@ function updateMostRecentOnlineContacts(presences, diff, currentUser, oldMostRec
         avatar: joins[userId].metas[0].avatar,
       });
     }, []);
+
     return joinUsers.length ?
-      oldMostRecentOnlineContacts :
       joinUsers
-        .concat(oldMostRecentOnlineContacts)
-        .slice(0, NUMBER_OF_ONLINE_CONTACTS_ON_RIGHT_DRAWER);
+        .concat(oldMostRecentOnlineContacts.toJS())
+        .slice(0, NUMBER_OF_ONLINE_CONTACTS_ON_RIGHT_DRAWER) :
+      oldMostRecentOnlineContacts.toJS();
   }
 
   if (leaveIds.length) {
-    const isIntersected = oldMostRecentOnlineContacts.find((item) => leaveIds.indexOf(item.id) > -1);
+    const isIntersected = oldMostRecentOnlineContacts.toJS().find((item) => leaveIds.indexOf(item.id) > -1);
     return !isIntersected ?
-      oldMostRecentOnlineContacts :
-      getMostRecentOnlineContacts(presences);
+      oldMostRecentOnlineContacts.toJS() :
+      getMostRecentOnlineContacts(presences, currentUser);
   }
 
-  return oldMostRecentOnlineContacts;
+  return oldMostRecentOnlineContacts.toJS();
 }
 
 function appReducer(state = initialState, action) {
@@ -82,7 +84,7 @@ function appReducer(state = initialState, action) {
       const syncStatePresences = Presence.syncState(state.get('presence'), action.initialPresence);
       return state
         .set('presence', fromJS(syncStatePresences))
-        .set('mostRecentOnlineContacts', fromJS(getMostRecentOnlineContacts(syncStatePresences)));
+        .set('mostRecentOnlineContacts', fromJS(getMostRecentOnlineContacts(syncStatePresences, state.get('currentUser'))));
 
     case UPDATE_PRESENCE_DIFF: // eslint-disable-line
       const syncDiffPresences = Presence.syncDiff(state.get('presence'), action.diff);
