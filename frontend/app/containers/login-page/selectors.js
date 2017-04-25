@@ -4,11 +4,11 @@
 
 import { createSelector } from 'reselect';
 
-const selectLogin = (state) => state.get('login');
+const selectLogin = (state) => state.login;
 
 const makeSelectLoginInfo = () => createSelector(
   selectLogin,
-  (loginState) => loginState.get('loginInfo')
+  (loginState) => loginState.loginInfo
 );
 
 export {

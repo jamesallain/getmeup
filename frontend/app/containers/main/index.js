@@ -35,7 +35,7 @@ export class App extends React.Component { // eslint-disable-line react/prefer-s
 
   static propTypes = {
     children: React.PropTypes.node,
-    mostRecentOnlineContacts: React.PropTypes.object,
+    mostRecentOnlineContacts: React.PropTypes.array,
     currentUser: React.PropTypes.object,
     router: React.PropTypes.shape({
       push: React.PropTypes.func.isRequired,
@@ -73,7 +73,7 @@ export class App extends React.Component { // eslint-disable-line react/prefer-s
           style={styles.contactsRightDrawer[showHideLoggedInComponentsStyle]}
         >
           <ContactsRightDrawer
-            mostRecentOnlineContacts={mostRecentOnlineContacts.toJS()}
+            mostRecentOnlineContacts={mostRecentOnlineContacts}
           />
         </section>
         <section
