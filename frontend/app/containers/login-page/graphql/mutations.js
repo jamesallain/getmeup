@@ -26,7 +26,7 @@ export default graphql(loginMutation, {
       ownProps.onLoginSuccess(user);
       // connectSocket(ownProps);
     })
-    .catch((error) => {
+    .catch(() => {
       // TODO: error handling here
       // console.log({error});
     }),

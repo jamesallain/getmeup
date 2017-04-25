@@ -3,7 +3,6 @@
  * If we were to do this in store.js, reducers wouldn't be hot reloadable.
  */
 
-// import { combineReducers } from 'redux-immutable';
 import { combineReducers } from 'redux';
 import { LOCATION_CHANGE } from 'react-router-redux';
 
@@ -16,7 +15,7 @@ import graphqlClient from './graphql-client';
 /*
  * routeReducer
  *
- * The reducer merges route location changes into our immutable state.
+ * The reducer merges route location changes into our state.
  * The change is necessitated by moving to react-router-redux@4
  *
  */
@@ -33,9 +32,7 @@ function routeReducer(state = routeInitialState, action) {
   switch (action.type) {
     /* istanbul ignore next */
     case LOCATION_CHANGE:
-      return state.merge({
-        locationBeforeTransitions: action.payload,
-      });
+      return { ...state, locationBeforeTransitions: action.payload };
     default:
       return state;
   }

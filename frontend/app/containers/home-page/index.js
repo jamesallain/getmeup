@@ -17,7 +17,7 @@ export class HomePage extends React.Component { // eslint-disable-line react/pre
   }
 }
 
-export function mapDispatchToProps(dispatch) {
+export function mapDispatchToProps() {
   return {
   };
 }
