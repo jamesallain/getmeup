@@ -14,7 +14,8 @@ defmodule Getmeup.UserChannel do
     {:ok, _} = Presence.track(socket, current_user.id, %{
       status: "online",
       name: current_user.name,
-      avatar: current_user.avatar
+      avatar: current_user.avatar,
+      online_at: :os.system_time(:milli_seconds)
     })
     {:noreply, socket}
   end
