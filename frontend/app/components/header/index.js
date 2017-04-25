@@ -9,9 +9,9 @@ import {
   ToolbarGroup,
 } from 'material-ui/Toolbar';
 
-//import messages from './messages';
 import assets from '../../constants/assets';
 import folders from '../../constants/folders';
+// import messages from './messages';
 
 export default class Header extends React.Component { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {
@@ -20,8 +20,8 @@ export default class Header extends React.Component { // eslint-disable-line rea
 
   render() {
     const { currentUser } = this.props;
-    const avatarUrl = currentUser ? `/${folders.assets}/${currentUser.get('avatar')}` : assets.defaultAvatar;
-    const username = currentUser ? currentUser.get('name') : '';
+    const avatarUrl = currentUser ? `/${folders.assets}/${currentUser.avatar}` : assets.defaultAvatar;
+    const username = currentUser ? currentUser.name : '';
     return (
       <div>
         <Toolbar>

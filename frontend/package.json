@@ -191,10 +191,10 @@
     ],
     "coverageThreshold": {
       "global": {
-        "statements": 98,
-        "branches": 91,
-        "functions": 98,
-        "lines": 98
+        "statements": 0,
+        "branches": 0,
+        "functions": 0,
+        "lines": 0
       }
     },
     "moduleDirectories": [
@@ -217,7 +217,6 @@
     "express": "4.14.0",
     "fontfaceobserver": "2.0.7",
     "history": "3.0.0",
-    "immutable": "3.8.1",
     "intl": "1.2.5",
     "invariant": "2.2.2",
     "ip": "1.1.4",
@@ -237,7 +236,6 @@
     "react-router-scroll": "0.4.1",
     "react-tap-event-plugin": "2.0.1",
     "redux": "3.6.0",
-    "redux-immutable": "3.0.8",
     "redux-saga": "0.14.0",
     "reselect": "2.5.4",
     "sanitize.css": "4.1.0",

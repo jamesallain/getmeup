@@ -7,35 +7,30 @@ import { createSelector } from 'reselect';
 // makeSelectLocationState expects a plain JS object for the routing state
 const makeSelectLocationState = () => {
   let prevRoutingState;
-  let prevRoutingStateJS;
-
   return (state) => {
-    const routingState = state.get('route'); // or state.route
-
-    if (!routingState.equals(prevRoutingState)) {
+    const routingState = state.route;
+    if (JSON.stringify(routingState) !== JSON.stringify(prevRoutingState)) {
       prevRoutingState = routingState;
-      prevRoutingStateJS = routingState.toJS();
     }
-
-    return prevRoutingStateJS;
+    return prevRoutingState;
   };
 };
 
-const selectMain = (state) => state.get('global');
+const selectMain = (state) => state.global;
 
 const makeSelectPresence = () => createSelector(
   selectMain,
-  (mainState) => mainState.get('presence')
+  (mainState) => mainState.presence
 );
 
 const makeSelectCurrentUser = () => createSelector(
   selectMain,
-  (mainState) => mainState.get('currentUser')
+  (mainState) => mainState.currentUser
 );
 
 const makeSelectMostRecentOnlineContacts = () => createSelector(
   selectMain,
-  (mainState) => mainState.get('mostRecentOnlineContacts')
+  (mainState) => mainState.mostRecentOnlineContacts
 );
 
 export {

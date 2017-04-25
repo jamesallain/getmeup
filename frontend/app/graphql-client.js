@@ -13,7 +13,7 @@ const client = new ApolloClient({
     // },
     transportBatching: true,
   }),
-  reduxRootSelector: (state) => state.get('apollo'),
+  reduxRootSelector: (state) => state.apollo,
 });
 
 export default client;

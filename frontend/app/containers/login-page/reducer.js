@@ -2,15 +2,13 @@
  * Login page reducer
  */
 
-import { fromJS } from 'immutable';
-
 import {
   CHANGE_FIELD_VALUE,
   LOGIN_SUCCESS,
 } from './constants';
 
 // The initial state of event detail page
-const initialState = fromJS({
+const initialState = {
   loading: false,
   loginInfo: {
     email: false,
@@ -21,18 +19,18 @@ const initialState = fromJS({
     password: false,
     backendError: false,
   },
-});
-
+};
 
 function loginReducer(state = initialState, action) {
   switch (action.type) {
     case CHANGE_FIELD_VALUE:
-      return state
-        .setIn(['loginInfo', action.fieldName], action.fieldValue);
+      return {
+        ...state,
+        loginInfo: { ...state.loginInfo, [action.fieldName]: action.fieldValue },
+      };
 
     case LOGIN_SUCCESS:
-      return state
-        .set('loading', true);
+      return { ...state, loading: true };
 
     default:
       return state;

@@ -32,9 +32,7 @@ export default class LoginForm extends React.Component { // eslint-disable-line 
   submitLoginForm(e) {
     e.preventDefault();
     const { loginInfo, login } = this.props;
-    login(loginInfo.get('email'), loginInfo.get('password'));
-
-    // this.props.onLoginSuccess();
+    login(loginInfo.email, loginInfo.password);
   }
 
   render() {
