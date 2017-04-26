@@ -5,7 +5,6 @@
 import React from 'react';
 import Avatar from 'material-ui/Avatar';
 import FontIcon from 'material-ui/FontIcon';
-import RaisedButton from 'material-ui/RaisedButton';
 import {
   Toolbar,
   ToolbarGroup,
