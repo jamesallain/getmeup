@@ -5,6 +5,7 @@ import {
   SYNC_PRESENCE_STATE,
   UPDATE_PRESENCE_DIFF,
   UPDATE_CURRENT_USER,
+  CLICK_RIGHT_ICON_ON_TOOLBAR,
 } from './constants';
 
 /**
@@ -34,5 +35,14 @@ export function updateCurrentUser(user) {
   return {
     type: UPDATE_CURRENT_USER,
     user,
+  };
+}
+
+/**
+ * Click right icon on toolbar
+ */
+export function clickRightIconOnToolbar() {
+  return {
+    type: CLICK_RIGHT_ICON_ON_TOOLBAR,
   };
 }

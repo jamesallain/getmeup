@@ -4,6 +4,8 @@
 
 import React from 'react';
 import Avatar from 'material-ui/Avatar';
+import FontIcon from 'material-ui/FontIcon';
+import RaisedButton from 'material-ui/RaisedButton';
 import {
   Toolbar,
   ToolbarGroup,
@@ -16,6 +18,16 @@ import folders from '../../constants/folders';
 export default class Header extends React.Component { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {
     currentUser: React.PropTypes.object,
+    onClickRightIcon: React.PropTypes.func,
+  }
+
+  constructor(props, context) {
+    super(props, context);
+    this.clickRightIcon = this.clickRightIcon.bind(this);
+  }
+
+  clickRightIcon() {
+    this.props.onClickRightIcon();
   }
 
   render() {
@@ -38,6 +50,12 @@ export default class Header extends React.Component { // eslint-disable-line rea
               size={30}
             />
             <span style={styles.name}>{username}</span>
+            <FontIcon
+              className="material-icons"
+              onClick={this.clickRightIcon}
+            >
+              menu
+            </FontIcon>
           </ToolbarGroup>
         </Toolbar>
       </div>

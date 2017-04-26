@@ -33,10 +33,16 @@ const makeSelectMostRecentOnlineContacts = () => createSelector(
   (mainState) => mainState.mostRecentOnlineContacts
 );
 
+const makeSelectIsOpenRightDrawer = () => createSelector(
+  selectMain,
+  (mainState) => mainState.isOpenRightDrawer
+);
+
 export {
   makeSelectLocationState,
   selectMain,
   makeSelectPresence,
   makeSelectCurrentUser,
   makeSelectMostRecentOnlineContacts,
+  makeSelectIsOpenRightDrawer,
 };

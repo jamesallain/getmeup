@@ -12,7 +12,9 @@ export class HomePage extends React.Component { // eslint-disable-line react/pre
 
   render() {
     return (
-      <div />
+      <div style={styles}>
+        This is home page
+      </div>
     );
   }
 }
@@ -28,3 +30,7 @@ const mapStateToProps = createStructuredSelector({
 // Wrap the component to inject dispatch and state into it
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
 
+const styles = {
+  background: 'red',
+  float: 'right',
+};
