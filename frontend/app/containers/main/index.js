@@ -13,6 +13,7 @@ import { createStructuredSelector } from 'reselect';
 import routePaths from '../../route-paths';
 import ContactsRightDrawer from '../../components/contacts-right-drawer';
 import Header from '../../components/header';
+import MenuLeftDrawer from '../../components/menu-left-drawer';
 import {
   isUserAuthenticated,
 } from '../../utils/auth';
@@ -75,26 +76,39 @@ export class App extends React.Component { // eslint-disable-line react/prefer-s
       onClickRightIconOnToolbar,
     } = this.props;
 
-    const showHideLoggedInComponentsStyle = isUserAuthenticated() && currentUser ? 'show' : 'hide';
     const mainContentStyle = isOpenRightDrawer ? { ...styles.mainContent.base, ...styles.mainContent.open } : styles.mainContent.base;
 
     return (
       <StyleRoot>
-        <section style={styles.header[showHideLoggedInComponentsStyle]}>
-          <Header
-            currentUser={currentUser}
-            onClickRightIcon={onClickRightIconOnToolbar}
-          />
-        </section>
+        {isUserAuthenticated() && currentUser &&
+          <section>
+            <Header
+              currentUser={currentUser}
+              onClickRightIcon={onClickRightIconOnToolbar}
+            />
+          </section>
+        }
+
         <section style={mainContentStyle}>
           {React.Children.toArray(this.props.children)}
         </section>
-        <section style={styles.contactsRightDrawer[showHideLoggedInComponentsStyle]}>
-          <ContactsRightDrawer
-            mostRecentOnlineContacts={mostRecentOnlineContacts}
-            isOpenRightDrawer={isOpenRightDrawer}
-          />
-        </section>
+
+        {isUserAuthenticated() && currentUser &&
+          <section>
+            <MenuLeftDrawer
+              mostRecentOnlineContacts={mostRecentOnlineContacts}
+              isOpenRightDrawer={isOpenRightDrawer}
+            />
+          </section>
+        }
+        {isUserAuthenticated() && currentUser &&
+          <section>
+            <ContactsRightDrawer
+              mostRecentOnlineContacts={mostRecentOnlineContacts}
+              isOpenRightDrawer={isOpenRightDrawer}
+            />
+          </section>
+        }
       </StyleRoot>
     );
   }
@@ -139,9 +153,6 @@ const styles = {
   },
   mainContent: {
     base: {
-      // '-moz-transition': 'padding-right 218ms cubic-bezier(0.4, 0, 0.2, 1)',
-      // '-o-transition': 'padding-right 218ms cubic-bezier(0.4, 0, 0.2, 1)',
-      // '-webkit-transition': 'padding-right 218ms cubic-bezier(0.4, 0, 0.2, 1)',
       transition: 'padding-right 500ms cubic-bezier(0.4, 0, 0.2, 1)',
     },
     open: {
