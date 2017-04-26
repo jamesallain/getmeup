@@ -5,7 +5,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import MenuLeftDrawer from '../../components/menu-left-drawer';
 
 import {
   makeSelectCurrentUser,
@@ -17,14 +16,8 @@ export class HomePage extends React.Component { // eslint-disable-line react/pre
   }
 
   render() {
-    const { currentUser } = this.props;
     return (
-      <div style={styles}>
-        <MenuLeftDrawer
-          user={currentUser}
-        />
-        <p>This is home page</p>
-      </div>
+      <div style={styles}>This is home page</div>
     );
   }
 }

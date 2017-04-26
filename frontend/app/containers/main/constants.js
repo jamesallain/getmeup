@@ -15,3 +15,4 @@ export const SYNC_PRESENCE_STATE = 'getmeup/main/SYNC_PRESENCE_STATE';
 export const UPDATE_PRESENCE_DIFF = 'getmeup/main/UPDATE_PRESENCE_DIFF';
 export const UPDATE_CURRENT_USER = 'getmeup/main/UPDATE_CURRENT_USER';
 export const CLICK_RIGHT_ICON_ON_TOOLBAR = 'getmeup/main/CLICK_RIGHT_ICON_ON_TOOLBAR';
+export const CLICK_LEFT_ICON_ON_TOOLBAR = 'getmeup/main/CLICK_LEFT_ICON_ON_TOOLBAR';

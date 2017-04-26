@@ -25,6 +25,7 @@ import {
   updatePresenceDiff,
   updateCurrentUser,
   clickRightIconOnToolbar,
+  clickLeftIconOnToolbar,
 } from './actions';
 
 import {
@@ -32,6 +33,7 @@ import {
   makeSelectCurrentUser,
   makeSelectMostRecentOnlineContacts,
   makeSelectIsOpenRightDrawer,
+  makeSelectIsOpenLeftDrawer,
 } from './selectors';
 
 @Radium
@@ -42,11 +44,13 @@ export class App extends React.Component { // eslint-disable-line react/prefer-s
     mostRecentOnlineContacts: React.PropTypes.array,
     currentUser: React.PropTypes.object,
     isOpenRightDrawer: React.PropTypes.bool,
+    isOpenLeftDrawer: React.PropTypes.bool,
     router: React.PropTypes.shape({
       push: React.PropTypes.func.isRequired,
     }).isRequired,
 
     onClickRightIconOnToolbar: React.PropTypes.func,
+    onClickLeftIconOnToolbar: React.PropTypes.func,
   };
 
   componentDidMount() {
@@ -73,7 +77,9 @@ export class App extends React.Component { // eslint-disable-line react/prefer-s
       currentUser,
       mostRecentOnlineContacts,
       isOpenRightDrawer,
+      isOpenLeftDrawer,
       onClickRightIconOnToolbar,
+      onClickLeftIconOnToolbar,
     } = this.props;
 
     const mainContentStyle = isOpenRightDrawer ? { ...styles.mainContent.base, ...styles.mainContent.open } : styles.mainContent.base;
@@ -85,6 +91,7 @@ export class App extends React.Component { // eslint-disable-line react/prefer-s
             <Header
               currentUser={currentUser}
               onClickRightIcon={onClickRightIconOnToolbar}
+              onClickLeftIcon={onClickLeftIconOnToolbar}
             />
           </section>
         }
@@ -96,11 +103,12 @@ export class App extends React.Component { // eslint-disable-line react/prefer-s
         {isUserAuthenticated() && currentUser &&
           <section>
             <MenuLeftDrawer
-              mostRecentOnlineContacts={mostRecentOnlineContacts}
-              isOpenRightDrawer={isOpenRightDrawer}
+              user={currentUser}
+              isOpenLeftDrawer={isOpenLeftDrawer}
             />
           </section>
         }
+
         {isUserAuthenticated() && currentUser &&
           <section>
             <ContactsRightDrawer
@@ -121,6 +129,7 @@ export function mapDispatchToProps(dispatch) {
     onUpdatePresenceDiff: (diff) => dispatch(updatePresenceDiff(diff)),
     onUpdateCurrentUser: (user) => dispatch(updateCurrentUser(user)),
     onClickRightIconOnToolbar: () => dispatch(clickRightIconOnToolbar()),
+    onClickLeftIconOnToolbar: () => dispatch(clickLeftIconOnToolbar()),
   };
 }
 
@@ -129,28 +138,13 @@ const mapStateToProps = createStructuredSelector({
   currentUser: makeSelectCurrentUser(),
   mostRecentOnlineContacts: makeSelectMostRecentOnlineContacts(),
   isOpenRightDrawer: makeSelectIsOpenRightDrawer(),
+  isOpenLeftDrawer: makeSelectIsOpenLeftDrawer(),
 });
 
 // Wrap the component to inject dispatch and state into it
 export default connect(mapStateToProps, mapDispatchToProps)(App);
 
 const styles = {
-  contactsRightDrawer: {
-    show: {
-      display: 'block',
-    },
-    hide: {
-      display: 'none',
-    },
-  },
-  header: {
-    show: {
-      display: 'block',
-    },
-    hide: {
-      display: 'none',
-    },
-  },
   mainContent: {
     base: {
       transition: 'padding-right 500ms cubic-bezier(0.4, 0, 0.2, 1)',

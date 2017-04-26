@@ -38,6 +38,11 @@ const makeSelectIsOpenRightDrawer = () => createSelector(
   (mainState) => mainState.isOpenRightDrawer
 );
 
+const makeSelectIsOpenLeftDrawer = () => createSelector(
+  selectMain,
+  (mainState) => mainState.isOpenLeftDrawer
+);
+
 export {
   makeSelectLocationState,
   selectMain,
@@ -45,4 +50,5 @@ export {
   makeSelectCurrentUser,
   makeSelectMostRecentOnlineContacts,
   makeSelectIsOpenRightDrawer,
+  makeSelectIsOpenLeftDrawer,
 };

@@ -6,6 +6,7 @@ import {
   UPDATE_PRESENCE_DIFF,
   UPDATE_CURRENT_USER,
   CLICK_RIGHT_ICON_ON_TOOLBAR,
+  CLICK_LEFT_ICON_ON_TOOLBAR,
 } from './constants';
 
 /**
@@ -44,5 +45,14 @@ export function updateCurrentUser(user) {
 export function clickRightIconOnToolbar() {
   return {
     type: CLICK_RIGHT_ICON_ON_TOOLBAR,
+  };
+}
+
+/**
+ * Click left icon on toolbar
+ */
+export function clickLeftIconOnToolbar() {
+  return {
+    type: CLICK_LEFT_ICON_ON_TOOLBAR,
   };
 }

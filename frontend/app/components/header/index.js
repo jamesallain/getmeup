@@ -18,15 +18,21 @@ export default class Header extends React.Component { // eslint-disable-line rea
   static propTypes = {
     currentUser: React.PropTypes.object,
     onClickRightIcon: React.PropTypes.func,
+    onClickLeftIcon: React.PropTypes.func,
   }
 
   constructor(props, context) {
     super(props, context);
     this.clickRightIcon = this.clickRightIcon.bind(this);
+    this.clickLeftIcon = this.clickLeftIcon.bind(this);
   }
 
   clickRightIcon() {
     this.props.onClickRightIcon();
+  }
+
+  clickLeftIcon() {
+    this.props.onClickLeftIcon();
   }
 
   render() {
@@ -37,6 +43,12 @@ export default class Header extends React.Component { // eslint-disable-line rea
       <div>
         <Toolbar>
           <ToolbarGroup>
+            <FontIcon
+              className="material-icons"
+              onClick={this.clickLeftIcon}
+            >
+              menu
+            </FontIcon>
             <img
               alt="Logo"
               src={assets.logo}
