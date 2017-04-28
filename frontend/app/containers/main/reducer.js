@@ -7,6 +7,8 @@ import {
   UPDATE_PRESENCE_DIFF,
   UPDATE_CURRENT_USER,
   NUMBER_OF_ONLINE_CONTACTS_ON_RIGHT_DRAWER,
+  CLICK_RIGHT_ICON_ON_TOOLBAR,
+  CLICK_LEFT_ICON_ON_TOOLBAR,
 } from './constants';
 
 // The initial state of the App
@@ -16,6 +18,8 @@ const initialState = {
   presence: {},
   currentUser: null,
   mostRecentOnlineContacts: [],
+  isOpenRightDrawer: true,
+  isOpenLeftDrawer: true,
 };
 
 function formatTimestamp(timestamp) {
@@ -93,6 +97,20 @@ function appReducer(state = initialState, action) {
 
     case UPDATE_CURRENT_USER:
       return { ...state, currentUser: action.user };
+
+    case CLICK_RIGHT_ICON_ON_TOOLBAR:
+      return {
+        ...state,
+        isOpenRightDrawer: !state.isOpenRightDrawer,
+        isOpenLeftDrawer: false,
+      };
+
+    case CLICK_LEFT_ICON_ON_TOOLBAR:
+      return {
+        ...state,
+        isOpenLeftDrawer: !state.isOpenLeftDrawer,
+        isOpenRightDrawer: false,
+      };
 
     default:
       return state;

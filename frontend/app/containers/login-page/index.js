@@ -10,6 +10,11 @@ import {
   loginSuccess,
 } from './actions';
 
+import routePaths from '../../route-paths';
+import {
+  isUserAuthenticated,
+} from '../../utils/auth';
+
 import {
   makeSelectLoginInfo,
 } from './selectors';
@@ -21,6 +26,15 @@ export class LoginPage extends React.Component { // eslint-disable-line react/pr
     loginInfo: React.PropTypes.object,
     onChangeFieldValue: React.PropTypes.func,
     onLoginSuccess: React.PropTypes.func,
+    router: React.PropTypes.shape({
+      push: React.PropTypes.func.isRequired,
+    }).isRequired,
+  }
+
+  componentWillMount() {
+    if (isUserAuthenticated()) { // redirect to home path if logged in
+      this.props.router.push(routePaths.getHomePath());
+    }
   }
 
   render() {
