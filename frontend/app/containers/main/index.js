@@ -53,7 +53,7 @@ export class App extends React.Component { // eslint-disable-line react/prefer-s
     onClickLeftIconOnToolbar: React.PropTypes.func,
   };
 
-  componentDidMount() {
+  componentDidMount() { // this function in just triggered once when initialization
     if (!isUserAuthenticated()) {
       this.props.router.push(routePaths.getLoginPath());
       return;
@@ -61,6 +61,8 @@ export class App extends React.Component { // eslint-disable-line react/prefer-s
     this.checkAndConnectSocket();
   }
 
+  // using this function to check socket connection every time page render
+  // so that we're able to connect manually socket after user login successfully
   componentDidUpdate() {
     this.checkAndConnectSocket();
   }
@@ -152,5 +154,8 @@ const styles = {
     open: {
       paddingRight: 200,
     },
+  },
+  menuLeftDrawer: {
+    top: 56,
   },
 };

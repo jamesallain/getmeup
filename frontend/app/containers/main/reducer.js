@@ -18,8 +18,8 @@ const initialState = {
   presence: {},
   currentUser: null,
   mostRecentOnlineContacts: [],
-  isOpenRightDrawer: false,
-  isOpenLeftDrawer: false,
+  isOpenRightDrawer: true,
+  isOpenLeftDrawer: true,
 };
 
 function formatTimestamp(timestamp) {
