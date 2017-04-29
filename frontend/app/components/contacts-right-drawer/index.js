@@ -3,6 +3,7 @@
  */
 
 import React from 'react';
+import { Link } from 'react-router';
 import { FormattedMessage } from 'react-intl';
 import Drawer from 'material-ui/Drawer';
 import { List, ListItem } from 'material-ui/List';
@@ -35,11 +36,16 @@ export default class ContactsRightDrawer extends React.Component { // eslint-dis
               <FormattedMessage {...messages.onlineLabel} />
             </Subheader>
             {mostRecentOnlineContacts.map((user) =>
-              <ListItem
-                key={user.id}
-                primaryText={user.name}
-                leftAvatar={<Avatar src={`/${folders.assets}/${user.avatar}`} />}
-              />
+              <Link
+                to={`/users/${user.id}`}
+                style={styles.contactLink}
+              >
+                <ListItem
+                  key={user.id}
+                  primaryText={user.name}
+                  leftAvatar={<Avatar src={`/${folders.assets}/${user.avatar}`} />}
+                />
+              </Link>
             )}
           </List>
         </Drawer>
@@ -52,5 +58,8 @@ const styles = {
   drawerContainer: {
     width: 200,
     top: 56,
+  },
+  contactLink: {
+    textDecoration: 'none',
   },
 };
