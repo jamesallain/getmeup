@@ -3,12 +3,20 @@ defmodule Getmeup.Schema do
   import_types Getmeup.Schema.Types.User
 
   query do
+    @desc "Get all users"
     field :users, list_of(:user) do
       resolve &Getmeup.UserResolver.all/2
     end
 
+    @desc "Get current user"
     field :current_user, :user do
       resolve &Getmeup.UserResolver.get_current_user/2
+    end
+
+    @desc "Get user by id"
+    field :user_by_id, type: :user do
+      arg :id, non_null(:id)
+      resolve &Getmeup.UserResolver.get_user_by_id/2
     end
   end
 

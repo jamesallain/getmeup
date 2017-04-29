@@ -7,7 +7,7 @@ import LoginForm from '../../../components/login-form';
 // import { connectSocket } from '../../../utils/socket';
 
 const loginMutation = gql`
-  mutation signIn($email: String!, $password: String!) {
+  mutation SignIn($email: String!, $password: String!) {
     sign_in(email: $email, password: $password) {
       id
       email
@@ -24,7 +24,6 @@ export default graphql(loginMutation, {
     .then(({ data }) => {
       const user = data.sign_in;
       ownProps.onLoginSuccess(user);
-      // connectSocket(ownProps);
     })
     .catch(() => {
       // TODO: error handling here

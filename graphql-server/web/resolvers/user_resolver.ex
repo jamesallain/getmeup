@@ -20,6 +20,16 @@ defmodule Getmeup.UserResolver do
     {:error, "Not authorized."}
   end
 
+  def get_user_by_id(%{id: id}, _context) do
+    case Repo.get(User, id) do
+      nil  -> {:error, "User id #{id} not found"}
+      user -> {:ok, user}
+    end
+  end
+  def get_user_by_id(_args, _info) do
+    {:error, "Not authorized."}
+  end
+
 
   def sign_up(args, _info) do
     changeset = User.changeset(%User{}, args)

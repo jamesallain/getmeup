@@ -53,7 +53,27 @@ export default function createRoutes(store) {
 
         importModules.catch(errorLoading);
       },
-    }, {
+    },
+    {
+      path: routePaths.getUserDetailPath(),
+      name: 'user detail',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          import('containers/user-detail-page/reducer'),
+          import('containers/user-detail-page'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, component]) => {
+          injectReducer('userDetail', reducer.default);
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    },
+    {
       path: '*',
       name: 'notfound',
       getComponent(nextState, cb) {

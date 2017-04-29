@@ -16,13 +16,10 @@ import assets from '../../constants/assets';
 export default class MenuLeftDrawer extends React.Component { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {
     user: React.PropTypes.object,
-    isOpenLeftDrawer: React.PropTypes.object,
+    isOpenLeftDrawer: React.PropTypes.bool,
   }
 
   render() {
-
-    console.log('---------- render left drawer');
-
     const {
       user,
       isOpenLeftDrawer,
@@ -31,12 +28,11 @@ export default class MenuLeftDrawer extends React.Component { // eslint-disable-
     const avatar = user ? `/${folders.assets}/${user.avatar}` : assets.defaultAvatar;
 
     return (
-      <div style={styles.container}>
+      <div>
         <Drawer
           openSecondary={false}
           open={isOpenLeftDrawer}
           containerStyle={styles.drawerContainer}
-          style={styles.drawer}
         >
           <List>
             <ListItem
@@ -62,31 +58,34 @@ export default class MenuLeftDrawer extends React.Component { // eslint-disable-
 }
 
 const styles = {
-  container: {
+  drawerContainer: {
     width: 200,
     top: 56,
-    height: 300,
-    background: 'yellow',
-    '@media (min-width: 782px)': {
-      width: 300,
-    },
-
-    '@media (min-width: 1000px)': {
-      width: 400,
-    },
   },
-  drawer: {
-    height: '100%',
-  },
-  drawerContainer: {
-    position: 'relative',
-    width: '100%',
-  },
-  listItem: {
-    fontSize: 30,
-    '@media (min-width: 782px)': {
-      fontSize: 35,
-    },
-  },
+  // container: {
+  //   width: 200,
+  //   top: 56,
+  //   height: '100vh',
+  //   background: 'yellow',
+  //   '@media (min-width: 782px)': {
+  //     width: 200,
+  //   },
+  //   '@media (min-width: 1000px)': {
+  //     width: 200,
+  //   },
+  // },
+  // drawer: {
+  //   height: '100%',
+  // },
+  // drawerContainer: {
+  //   position: 'relative',
+  //   width: '100%',
+  // },
+  // listItem: {
+  //   fontSize: 15,
+  //   // '@media (min-width: 782px)': {
+  //   //   fontSize: 35,
+  //   // },
+  // },
 
 };

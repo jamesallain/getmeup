@@ -84,7 +84,7 @@ export class App extends React.Component { // eslint-disable-line react/prefer-s
       onClickLeftIconOnToolbar,
     } = this.props;
 
-    const mainContentStyle = isOpenRightDrawer ? { ...styles.mainContent.base, ...styles.mainContent.open } : styles.mainContent.base;
+    const mainContentStyle = isUserAuthenticated() && currentUser ? { ...styles.mainContent.base, ...styles.mainContent.open } : styles.mainContent.base;
 
     return (
       <StyleRoot>
@@ -124,7 +124,6 @@ export class App extends React.Component { // eslint-disable-line react/prefer-s
   }
 }
 
-
 export function mapDispatchToProps(dispatch) {
   return {
     onSyncPresenceState: (initialPresence) => dispatch(syncPresenceState(initialPresence)),
@@ -149,13 +148,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(App);
 const styles = {
   mainContent: {
     base: {
-      transition: 'padding-right 500ms cubic-bezier(0.4, 0, 0.2, 1)',
+      transition: 'padding-right padding-left 200ms cubic-bezier(0.4, 0, 0.2, 1)',
     },
     open: {
       paddingRight: 200,
+      paddingLeft: 200,
     },
-  },
-  menuLeftDrawer: {
-    top: 56,
   },
 };
