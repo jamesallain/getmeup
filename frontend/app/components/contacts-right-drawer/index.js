@@ -11,6 +11,7 @@ import Subheader from 'material-ui/Subheader';
 import Avatar from 'material-ui/Avatar';
 import messages from './messages';
 import folders from '../../constants/folders';
+import routePaths from '../../route-paths';
 
 export default class ContactsRightDrawer extends React.Component { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {
@@ -37,11 +38,11 @@ export default class ContactsRightDrawer extends React.Component { // eslint-dis
             </Subheader>
             {mostRecentOnlineContacts.map((user) =>
               <Link
-                to={`/users/${user.id}`}
+                key={user.id}
+                to={routePaths.getUserDetailPathWithParams(user.id)}
                 style={styles.contactLink}
               >
                 <ListItem
-                  key={user.id}
                   primaryText={user.name}
                   leftAvatar={<Avatar src={`/${folders.assets}/${user.avatar}`} />}
                 />

@@ -14,8 +14,13 @@ function getUserDetailPath() {
   return '/users/:userId';
 }
 
+function getUserDetailPathWithParams(userId) {
+  return `/users/${userId}`;
+}
+
 export default {
   getHomePath,
   getLoginPath,
   getUserDetailPath,
+  getUserDetailPathWithParams,
 };

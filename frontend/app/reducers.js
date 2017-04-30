@@ -9,6 +9,7 @@ import { LOCATION_CHANGE } from 'react-router-redux';
 import languageProviderReducer from 'containers/language-provider/reducer';
 import loginReducer from './containers/login-page/reducer';
 import globalReducer from './containers/main/reducer';
+import userDetailReducer from './containers/user-detail-page/reducer';
 
 import graphqlClient from './graphql-client';
 
@@ -48,6 +49,7 @@ export default function createReducer(asyncReducers) {
     route: routeReducer,
     language: languageProviderReducer,
     login: loginReducer,
+    userDetail: userDetailReducer,
     ...asyncReducers,
   });
 }

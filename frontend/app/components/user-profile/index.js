@@ -4,7 +4,6 @@
 
 import React from 'react';
 import Avatar from 'material-ui/Avatar';
-import FontIcon from 'material-ui/FontIcon';
 
 import assets from '../../constants/assets';
 import folders from '../../constants/folders';
@@ -21,30 +20,12 @@ export default class UserProfile extends React.Component { // eslint-disable-lin
     const name = user ? user.name : '';
     return (
       <div>
-        <section style={styles.userInfo}>
-          <Avatar
-            src={avatar}
-            size={100}
-            style={styles.avatar}
-          />
-          <p>{name}</p>
-          <div>
-            <FontIcon
-              className="material-icons"
-            >
-              video_call
-            </FontIcon>
-          </div>
-        </section>
+        <Avatar
+          src={avatar}
+          size={100}
+        />
+        <p>{name}</p>
       </div>
     );
   }
 }
-
-const styles = {
-  userInfo: {
-    marginTop: 15,
-    marginBottom: 10,
-    textAlign: 'center',
-  },
-};
